@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import Message from "./ServerBody/Message";
 import SubmitMessage from "./ServerBody/SubmitMessage";
 
@@ -7,56 +9,34 @@ const DUMMY_MESSAGES = [
     user_name: "HolyJack",
     image: "",
     message: "Wow",
-    date: "",
+    date: new Date(),
   },
   {
     id: "m2",
     user_name: "HolyJack",
     image: "",
     message: "Wow",
-    date: "wooooooow",
+    date: new Date(),
   },
   {
     id: "m3",
     user_name: "HolyJack",
     image: "",
     message: "Wow",
-    date: "wooooooow",
+    date: new Date(),
   },
-  {
-    id: "m4",
-    user_name: "HolyJack",
-    image: "",
-    message: "Wow",
-    date: "wooooooow",
-  },
-  {
-    id: "m5",
-    user_name: "HolyJack",
-    image: "",
-    message: "Wow",
-    date: "wooooooow",
-  },
-  {
-    id: "m6",
-    user_name: "HolyJack",
-    image: "",
-    message: "Wow",
-    date: "wooooooow",
-  },
-  {
-    id: "m7",
-    user_name: "HolyJack",
-    image: "",
-    message: "Wow",
-    date: "wooooooow",
-  },
+
 ];
 
 const ServerBody = (props) => {
-  const messagesList = DUMMY_MESSAGES.map((message) => (
-    <Message id={message.id} />
-  ));
+  const [messages, setMessages] = useState(DUMMY_MESSAGES);
+  
+  let messagesList = messages.map((message) => (<Message id={message.id} user={message} />));
+    
+const newMessageHandler = (message) => {
+  setMessages(oldMessages => ([...oldMessages, message]))
+}
+
 
   return (
     <div className="relative h-screen w-full bg-gray-700 flex flex-col">
@@ -64,10 +44,10 @@ const ServerBody = (props) => {
         <div className=" text-gray-200">#general-1</div>
         <div>icons</div>
       </section>
-      <div className=" relative overflow-y-auto h-full max-h-full">
-        <ol >{messagesList}</ol>
-      </div>
-      <SubmitMessage />
+      <div className=" relative overflow-y-auto h-full max-h-full" >
+          <ol className=" absolute bottom-0">{messagesList}</ol>
+       </div>
+      <SubmitMessage onMessageSubmit={newMessageHandler}/>
     </div>
   );
 };
