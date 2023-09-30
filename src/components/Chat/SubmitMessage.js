@@ -5,32 +5,32 @@ import FileIconSvg from "./static/FileIconSvg";
 import { useState } from "react";
 
 const SubmitMessage = (props) => {
-    const [message, setMessage] = useState('');
-    
-    const submitHandler = (event) => { 
-        event.preventDefault();
-        
-        if (message.trim().length === 0 ) {
-            return;
-        }
-        console.log(message);
-        
-        props.onMessageSubmit({
-            id: new Date(),
-            user_name: "Submiter",
-            message: message,
-            img: "",
-            date: new Date(),
-        });
-        setMessage('');
-    } 
+  const [message, setMessage] = useState("");
 
-    const textChangeHandler = (event) => {
-        setMessage(event.target.value);
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    if (message.trim().length === 0) {
+      return;
     }
+    console.log(message);
+
+    props.onMessageSubmit({
+      id: Math.random(),
+      user_name: "Submiter",
+      message: message,
+      img: "",
+      date: new Date(),
+    });
+    setMessage("");
+  };
+
+  const textChangeHandler = (event) => {
+    setMessage(event.target.value);
+  };
 
   return (
-    <form onSubmit={submitHandler} className=" w-full h-fit px-4 pb-6 grow">
+    <form onSubmit={submitHandler} className=" w-full h-fit px-4 pb-6">
       <div className="w-full h-8 rounded-lg bg-gray-600 flex relative">
         <div className=" mx-4 flex items-center justify-center">
           <PlusIconSvg />
@@ -41,7 +41,7 @@ const SubmitMessage = (props) => {
           placeholder="Message #general-1"
           value={message}
           onChange={textChangeHandler}
-        ></input> 
+        ></input>
         <div className=" h-full mx-4 flex items-center justify-center">
           <GiftIconSvg />
           <EmojiIconSvg />

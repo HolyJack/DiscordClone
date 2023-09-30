@@ -21,7 +21,7 @@ const DUMMY_CONTENT = [
         active: "active",
       },
       {
-        id: "c1t2",
+        id: "c1t3",
         type: "text-channel",
         name: "general-chat-3",
         active: "",
@@ -30,11 +30,11 @@ const DUMMY_CONTENT = [
   },
 ];
 
-const ServerMenu = (props) => {
+const ServerMenu = () => {
   const itemsList = DUMMY_CONTENT[0].children.map((item) => {
     return (
       <Item
-        id={item.id}
+        key={item.id}
         type={item.type}
         name={item.name}
         active={item.active}

@@ -28,16 +28,21 @@ const DUMMY_SERVERS = [
   },
 ];
 
-const Sidebar = (props) => {
+const Sidebar = () => {
   const serverList = DUMMY_SERVERS.map((server) => {
     return (
-      <SidebarIcon id={server.id} name={server.name} image={server.image} />
+      <SidebarIcon
+        key={server.id}
+        id={server.id}
+        name={server.name}
+        image={server.image}
+      />
     );
   });
 
   return (
-    <div className=" h-full w-14 m-0 flex flex-col bg-gray-900 text-white shadow">
-      <SidebarIcon id="discord" name="discord" image={logo}/>
+    <div className="fixed top-0 left-0 h-full w-14 m-0 flex flex-col bg-gray-900 text-white shadow">
+      <SidebarIcon id="discord" name="discord" image={logo} />
       {serverList}
     </div>
   );
